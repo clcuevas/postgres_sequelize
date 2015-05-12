@@ -17,7 +17,7 @@ describe('Pet REST API', function() {
   it('should create a new Pet', function(done) {
     chai.request('localhost:3000')
     .post('/api/pets')
-    .send({name: 'velia', owner: 'tiana', weight: 2, type: 'hedgehog'})
+    .send({id: 99, name: 'velia', owner: 'tiana', weight: 2, type: 'hedgehog'})
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res.body).to.have.property('id');
@@ -33,18 +33,18 @@ describe('Pet REST API', function() {
         expect(err).to.eql(null);
         expect(typeof res.body).to.equal('object');
         expect(res.body[0].name).to.equal('peanut');
-        expect(res.body[1].name).to.equal('suki');
+        expect(res.body[1].name).to.equal('butter');
         done();
       });
   });
 
   it('should DELETE a pet collection', function(done) {
     chai.request('localhost:3000')
-      .del('/api/pets/' + req.params.id)
+      .del('/api/pets/99')
       .end(function(err, res) {
         expect(err).to.eql(null);
         console.log(res.body.msg);
-        expect(res.body.msg).to.equal('success');
+        expect(res.body.msg).to.equal('successfully deleted');
         done();
       });
   });
